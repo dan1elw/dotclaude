@@ -36,7 +36,7 @@ dotclaude/
 ## Install into a project
 
 ```bash
-git clone https://github.com/<you>/dotclaude.git ~/dotclaude
+git clone https://github.com/dan1elw/dotclaude.git ~/dotclaude
 cd /path/to/your-project
 ~/dotclaude/scripts/install.sh
 ```
