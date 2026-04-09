@@ -1,4 +1,4 @@
-name: validate-shell-and-json
+name: ci
 
 on:
   pull_request:
@@ -10,6 +10,14 @@ permissions:
   contents: read
 
 jobs:
+  lint-templates:
+    name: lint templates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: run template linter
+        run: bash scripts/lint-templates.sh
+
   shellcheck:
     name: shellcheck
     runs-on: ubuntu-latest
@@ -32,3 +40,13 @@ jobs:
             echo "checking $f"
             jq empty "$f"
           done
+
+  install-integration:
+    name: install integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ensure scripts are executable
+        run: chmod +x scripts/*.sh hooks/*.sh
+      - name: run install integration tests
+        run: bash scripts/test-install.sh
