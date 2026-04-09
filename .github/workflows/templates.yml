@@ -1,0 +1,19 @@
+name: templates
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-templates:
+    name: lint templates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: run template linter
+        run: bash scripts/lint-templates.sh
