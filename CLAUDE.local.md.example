@@ -1,0 +1,11 @@
+# Personal Preferences
+
+<!--
+This file is loaded alongside CLAUDE.md but is gitignored.
+Put personal preferences that should NOT be shared with the team:
+  - Your editor, OS quirks, shell
+  - Preferred explanation style
+  - Local paths or tools
+-->
+
+-
