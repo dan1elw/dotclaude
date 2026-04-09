@@ -1,6 +1,6 @@
 # dotclaude
 
-![ci](https://github.com/USER/dotclaude/actions/workflows/ci.yml/badge.svg)
+![ci](https://github.com/dan1elw/dotclaude/actions/workflows/ci.yml/badge.svg)
 
 A personal, lean, token-efficient `.claude/` template for bootstrapping new Claude Code projects.
 
