@@ -1,0 +1,52 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint-templates:
+    name: lint templates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: run template linter
+        run: bash scripts/lint-templates.sh
+
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: check scripts and hooks
+        run: shellcheck scripts/*.sh hooks/*.sh
+
+  validate-json:
+    name: validate json
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: validate settings.json files
+        run: |
+          set -e
+          for f in settings.json settings.local.json.example .claude/settings.json; do
+            echo "checking $f"
+            jq empty "$f"
+          done
+
+  install-integration:
+    name: install integration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: ensure scripts are executable
+        run: chmod +x scripts/*.sh hooks/*.sh
+      - name: run install integration tests
+        run: bash scripts/test-install.sh
